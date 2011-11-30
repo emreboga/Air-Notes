@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style type="text/css">
+      html { height: 100% }
+      body { height: 100% }
+      #map_canvas { height: 50%; width: 50%; }
+    </style>
+    <script type="text/javascript" src="/static/core.js"></script>
+	<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
+  </head>
+  <body>
+	<b>Current location (latitude, longitude):</b> {{ geolocation }}
+	<div id="map_canvas"></div>
+	<br/>
+    <div>
+	  {% for airnote in airnotes %}
+        {% if airnote.author %}
+          {{ airnote.author.nickname }} wrote:
+        {% else %}
+          An anonymous person wrote:
+        {% endif %}
+        <blockquote>{{ airnote.content|escape }}</blockquote>
+      {% endfor %}
+	  <br/>
+      <div>
+        <textarea id="txtAreaContent" name="content" rows="3" cols="60">
+		</textarea>
+      </div>
+      <div>
+        <input type="button" value="Write" onclick="javascript:WriteNote()">
+      </div>
+      <br/>
+    </div>
+  </body>
+</html>
